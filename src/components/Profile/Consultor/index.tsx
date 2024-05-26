@@ -143,10 +143,9 @@ const ConsultorProfile = ({ user_id }: { user_id: string }) => {
                 )}
 
                 <p className="font-bold text-sm text-first mt-1 max-md:text-xs">
-                  Software engenheiro
                   {user?.expertise}
                 </p>
-                <p className="text-paragraph text-sm font-normal mt-5 mb-3 w-[90%]">
+                <p className="text-paragraph text-sm font-normal mt-5 mb-3 ">
                   {user
                     ? user.bio
                     : "Clique no botão editar e adicione sua descrição"}

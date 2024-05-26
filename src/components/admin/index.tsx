@@ -77,9 +77,8 @@ export const Admin = () => {
   useEffect(() => {
     if (user.user?.role === "ADMIN") {
       setUser(consultores.users);
-    } else {
-      router.push("/home");
     }
+    return;
   }, [user.user?.role]);
 
   const [dialog, setDialog] = useState<{

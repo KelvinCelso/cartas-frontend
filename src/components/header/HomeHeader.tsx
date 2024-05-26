@@ -55,13 +55,21 @@ const HomeHeader = () => {
         </Link>
       </div>
       <div className="space-x-5 flex items-center transition-all">
-        {admin ? (
-          <Link
-            href={`/admin`}
-            className=" text-white bg-first  px-10 py-2 rounded-lg"
-          >
-            Admin
-          </Link>
+        {user.user?.role === "ADMIN" ? (
+          <>
+            <Link
+              href={`/admin`}
+              className=" text-white bg-first  px-10 py-2 rounded-lg"
+            >
+              Admin
+            </Link>
+            <button
+              className=" text-first transition-all border-2 border-first px-5 py-1.5 hover:bg-first hover:text-white	 rounded-lg "
+              onClick={handleLogout}
+            >
+              Sair
+            </button>
+          </>
         ) : (
           <>
             <div className="m-0 p-0 max-md:hidden space-x-5 transition-all flex items-center">

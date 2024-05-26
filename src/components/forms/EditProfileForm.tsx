@@ -51,6 +51,10 @@ const EditProfileForm = ({ user }: { user: IUser }) => {
     }
   };
 
+  const handleReload = () => {
+    window.location.reload();
+  };
+
   const form = useForm<z.infer<typeof EditProfileSchema>>({
     resolver: zodResolver(EditProfileSchema),
     defaultValues: {
@@ -62,7 +66,6 @@ const EditProfileForm = ({ user }: { user: IUser }) => {
     },
   });
   async function onSubmit(values: z.infer<typeof EditProfileSchema>) {
-    setOpen(false);
     const formData = new FormData();
     formData.append("firstName", values.firstName);
     formData.append("lastName", values.lastName);
@@ -73,13 +76,12 @@ const EditProfileForm = ({ user }: { user: IUser }) => {
       formData.append("photo", file);
     }
 
+    setOpen(false);
     await axiosInstance
       .put(`/user/${user?.id}`, formData)
       .then((res) => {
-        setUser(res.data)
-       toast({
-          title: "Perfil alterado com sucesso!",
-        });
+        setUser(res.data);
+        handleReload();
       })
       .catch((error) => {
         toast({
@@ -96,15 +98,14 @@ const EditProfileForm = ({ user }: { user: IUser }) => {
           control={form.control}
           name="photo"
           render={({ field }) => (
-            <FormItem className="w-full flex space-x-24">
-              <Avatar className="object-cover w-12 h-12 rounded-full z-10 border border-gray-300 ">
+            <FormItem className="w-full flex">
+              <Avatar className="object-cover w-12 h-12  mr-2 rounded-full z-10 border border-gray-300 ">
                 <AvatarImage
                   src={`${user?.photo}`}
                   alt="foto de perfil"
                 ></AvatarImage>
                 <AvatarFallback className="text-sm">{`${user?.firstName[0].toUpperCase()}${user?.lastName[0].toUpperCase()}`}</AvatarFallback>
               </Avatar>
-
               <FormControl>
                 <Input
                   type="file"
