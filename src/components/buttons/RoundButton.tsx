@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 
 interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -5,6 +6,7 @@ interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   variation: "primary" | "secundary";
   px: string;
   py: string;
+  clasName?: string;
 }
 
 function RoundButton({ text, variation, px, py, ...rest }: IButtonProps) {
@@ -16,11 +18,13 @@ function RoundButton({ text, variation, px, py, ...rest }: IButtonProps) {
         paddingTop: py,
         paddingBottom: py,
       }}
-      className={`rounded-lg text-sm hover:scale-110 transition-all ${
-        variation === "primary"
-          ? "bg-first text-white "
-          : "border border-first text-first hover:bg-first hover:text-white"
-      } `}
+      className={cn(
+        `rounded-lg text-sm hover:scale-110 transition-all ${
+          variation === "primary"
+            ? "bg-first text-white "
+            : "border border-first text-first hover:bg-first hover:text-white"
+        } `
+      )}
       {...rest}
     >
       {text}
